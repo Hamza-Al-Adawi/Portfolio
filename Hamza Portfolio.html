@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="charcoal" data-design="soft">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hamza Al-Adawi | Cybersecurity · Founder of Sahro</title>
+<meta name="description" content="Computer Engineering student (cybersecurity pathway), founder of Sahro, and networking intern on the Middle East College network upgrade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=DM+Sans:wght@400;500;700&family=Merriweather:wght@700;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0B3C49; --teal-deep:#072a34; --dust:#CBD2D0; --dust-2:#e7ebea; --white:#fff;
+  --mint:#5FD4BC; --coral:#4f6f77; --amber:#F2B134; --sky:#aab7b5;
+  --glow:#14596a;--ink:#0b2a33; --muted:#4d6770;
+  --serif:"Merriweather",Georgia,serif; --sans:Calibri,"Carlito","DM Sans","Segoe UI",system-ui,sans-serif; --hand:Calibri,"Carlito","DM Sans","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--dust);color:var(--ink);font:17px/1.7 var(--sans)}
+h1,h2,h3{font-family:var(--serif);margin:0;line-height:1.1}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.hand{font-family:var(--hand);font-size:1.5rem;color:var(--amber);line-height:1.2}
+
+.bar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--teal) 96%,transparent);backdrop-filter:blur(6px)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;padding-top:12px;padding-bottom:12px;position:relative}
+.logo{color:#fff;font:800 1.15rem var(--serif);text-decoration:none;white-space:nowrap}
+.bar nav{display:flex;align-items:center}
+.bar nav a{color:var(--dust);text-decoration:none;margin-left:20px;font-size:.95rem}
+.bar nav a:hover{color:var(--mint)}
+.barctrls{display:flex;align-items:center;gap:10px;order:3}
+.burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border-radius:99px;border:2px solid var(--mint);background:transparent;color:var(--mint);cursor:pointer}
+@media (max-width:760px){
+  .burger{display:inline-flex}
+  .bar .wrap{flex-wrap:nowrap}
+  .barctrls{gap:6px}
+  .lang{margin-left:0;padding:4px 10px;font-size:.85rem}
+  [dir=rtl] .lang{margin-right:0}
+  .lang.gear span{display:none}
+  .lang.gear{padding:4px 8px}
+  .logo{font-size:1rem}
+  .bar nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--teal-deep);border:1px solid rgba(212,215,215,.18);border-radius:14px;margin-top:8px;padding:8px;gap:2px;box-shadow:0 18px 40px rgba(0,0,0,.35);z-index:50}
+  .bar nav.open{display:flex}
+  .bar nav a{margin:0;padding:12px 14px;border-radius:9px}
+  .bar nav a:hover{background:rgba(255,255,255,.06)}
+  [dir=rtl] .bar nav a{margin:0}
+}
+@media (max-width:360px){
+  .barctrls{gap:4px}
+  .lang{padding:4px 8px;font-size:.8rem}
+}
+
+/* hero */
+.hero{background:radial-gradient(900px 500px at 85% 20%,var(--glow) 0%,transparent 60%),var(--teal);color:#fff;padding:96px 0 104px;overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center}
+.hero .hand.note{color:#fff}
+.hero h1{font-size:clamp(2rem,4.4vw,3.25rem);font-weight:700;letter-spacing:-.01em}
+.hero .tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 20px}
+.pill{padding:5px 14px;border-radius:99px;font-weight:700;font-size:.88rem;color:var(--teal)}
+.p1{background:var(--mint)}.p2{background:var(--mint)}.p3{background:var(--dust)}.p4{background:var(--dust)}
+.hero p{color:var(--dust);font-size:1.14rem;max-width:50ch;margin:0 0 24px}
+.hero p b{color:#fff}
+.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;padding:13px 24px;border-radius:8px;border:2px solid var(--mint);color:var(--mint);background:transparent;text-decoration:none;font:700 1rem var(--sans);cursor:pointer}
+.btn.fill{background:var(--mint);color:var(--teal)}
+.btn.coral{background:var(--dust);border-color:var(--dust);color:var(--teal-deep)}
+.btn:hover{transform:translateY(-2px)}
+.note{margin-top:22px}
+
+/* network art */
+.net{width:100%;height:auto;max-width:520px;justify-self:center}
+.link{stroke-width:2.5;stroke-dasharray:3 9;stroke-linecap:round;animation:flow 1.4s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-24}}
+.node{transform-box:fill-box;transform-origin:center;animation:pop .6s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.ring{transform-box:fill-box;transform-origin:center;animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.8);opacity:.7}100%{transform:scale(2.1);opacity:0}}
+.lbl{font:700 12px var(--sans);fill:var(--dust)}
+
+
+.quotes{background:rgba(255,255,255,.07);border:1px solid rgba(212,215,215,.25);border-radius:26px;padding:40px 40px 32px;justify-self:stretch;width:100%;display:flex;flex-direction:column;min-height:300px}
+.quotes h2{font:700 .95rem var(--sans);color:var(--dust);margin:0 0 22px;letter-spacing:.02em}
+.qstage{display:grid;flex:1;align-content:center}
+.q{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .7s ease,transform .7s ease,visibility 0s linear .7s}
+.q.on{opacity:1;visibility:visible;transform:none;transition:opacity .7s ease,transform .7s ease}
+.q blockquote{margin:0 0 26px;font:600 clamp(1.55rem,2.7vw,2.3rem)/1.4 var(--serif);color:#fff}
+.q figcaption b{display:block;font:700 1.2rem var(--sans);color:var(--mint)}
+.q figcaption span{color:var(--dust);font-size:.98rem}
+.qdots{display:flex;gap:9px;margin-top:30px;align-items:center}
+.qdots button{width:10px;height:10px;padding:0;border:0;border-radius:99px;background:rgba(212,215,215,.4);cursor:pointer;transition:width .3s,background .3s}
+.qdots button[aria-current=true]{width:34px;background:var(--mint)}
+.qdots button:hover{background:var(--dust)}
+.qdots button[aria-current=true]:hover{background:var(--mint)}
+/* proof strip: colourful */
+.proof .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:0}
+.proof div{padding:26px 24px}
+.proof div:nth-child(1){background:var(--mint)}.proof div:nth-child(2){background:var(--amber)}.proof div:nth-child(3){background:var(--coral)}.proof div:nth-child(4){background:var(--sky)}
+.proof strong{display:block;font:800 2.3rem var(--serif);color:var(--teal);line-height:1.1}
+.proof span{color:var(--teal-deep);font-weight:500;font-size:.95rem}
+
+section{padding:68px 0}
+.head{margin-bottom:32px}
+.head h2{font-size:clamp(1.8rem,3.8vw,2.5rem);color:var(--teal);font-weight:800;letter-spacing:-.01em}
+.head p{color:var(--muted);max-width:60ch;margin:10px 0 0}
+.light{background:var(--dust-2)}.white{background:#fff}
+
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+.about p{margin:0 0 14px}
+.facts{background:#fff;border-radius:14px;padding:24px;margin:0;display:grid;grid-template-columns:96px 1fr;gap:10px 14px;align-content:start}
+.facts dt{color:var(--muted);font-size:.9rem}.facts dd{margin:0;font-weight:500}
+
+/* experience */
+.tl{border-left:3px solid var(--teal);margin-left:6px}
+.job{position:relative;padding:0 0 30px 30px}
+.job::before{content:"";position:absolute;left:-11px;top:7px;width:19px;height:19px;border-radius:50%;background:var(--c,var(--teal));border:3px solid #fff;box-shadow:0 0 0 2px var(--c,var(--teal))}
+.when{font-size:.88rem;color:var(--muted)}
+.job h3{font-size:1.22rem;color:var(--teal);margin:3px 0}
+.org{font-weight:700;color:var(--coral);margin:0 0 6px;font-size:.98rem}
+.job p{margin:0;max-width:72ch}
+.badge{display:inline-block;margin-left:8px;padding:2px 10px;border-radius:99px;background:var(--c);color:var(--teal-deep);font:700 .74rem var(--sans);vertical-align:middle}
+.learn{margin-top:6px;padding-left:30px}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:#fff;border-radius:14px;padding:24px;display:flex;flex-direction:column}
+.card .yr{font-size:.85rem;color:var(--muted)}
+.card h3{font-size:1.24rem;color:var(--teal);margin:2px 0 8px}
+.card p{margin:0 0 14px}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tag{font-size:.8rem;padding:3px 11px;border-radius:99px;background:var(--dust-2);color:var(--teal);font-weight:500}
+.links{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+.links a{padding:8px 16px;border-radius:8px;font-weight:700;font-size:.92rem;text-decoration:none;border:2px solid var(--teal);color:var(--teal)}
+.links a.fill{background:var(--teal);color:#fff}
+
+/* skills */
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:28px}
+.box{background:#fff;border-radius:14px;padding:26px}
+.box.dark{background:var(--teal);color:#fff}
+.box h3{font-size:1.38rem;color:var(--teal);margin-bottom:16px}
+.box.dark h3{color:var(--mint)}
+.grp{margin-bottom:18px}
+.grp h4{margin:0 0 8px;font:700 .95rem var(--sans);color:var(--coral)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:5px 12px;border-radius:8px;background:var(--dust-2);color:var(--teal);font-size:.9rem;font-weight:700}
+.chip.core{background:var(--teal);color:#fff}
+.soft{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.soft b{display:block;color:#fff}.soft span{color:var(--dust);font-size:.95rem}
+.soft li{border-left:4px solid var(--c);padding-left:12px}
+.creds{margin:0;padding-left:20px}.creds li{margin:9px 0}
+.creds strong{color:var(--teal)}
+
+/* beyond work */
+.fun{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.fun div{border-radius:16px;padding:22px;color:var(--teal-deep)}
+.fun h3{font-size:1.2rem;margin-bottom:8px}
+.fun p{margin:0;font-size:.97rem}
+.f1,.f2,.f3,.f4,.f5,.f6,.f7{background:var(--dust)}
+
+/* contact */
+.contact{background:linear-gradient(160deg,var(--teal) 0%,var(--teal-deep) 100%);color:#fff}
+.contact .head h2{color:#fff}.contact .head p{color:var(--dust)}
+.cgrid{display:block}
+.clist{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.clist span{display:inline-block;width:88px;color:var(--mint);font-weight:700}
+.clist a{color:#fff}
+form{display:grid;gap:14px}
+label{display:grid;gap:4px;font-size:.9rem;color:var(--dust)}
+input,textarea{font:inherit;padding:11px 12px;border-radius:8px;border:1px solid rgba(203,210,208,.4);background:rgba(255,255,255,.08);color:#fff}
+input::placeholder,textarea::placeholder{color:#9fb0b3}
+textarea{min-height:110px;resize:vertical}
+footer{background:var(--teal-deep);color:var(--dust);padding:22px 0;font-size:.9rem}
+
+
+.lang{margin-left:20px;padding:4px 14px;border-radius:99px;border:2px solid var(--mint);background:transparent;color:var(--mint);font:700 .95rem var(--sans);cursor:pointer}
+.lang:hover{background:var(--mint);color:var(--teal)}
+.clist a{unicode-bidi:plaintext}
+
+/* Settings dropdown: colour themes + design styles */
+.gear{margin-left:8px;display:inline-flex;gap:7px;align-items:center}
+.set{position:fixed;z-index:30;top:64px;right:16px;width:300px;max-width:calc(100vw - 32px);background:#fff;color:var(--ink);border-radius:14px;padding:18px 18px 16px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.set[hidden]{display:none}
+.set .sh{font:700 .82rem var(--sans);color:var(--muted);margin:14px 0 8px}
+.set .sh.big{font:800 1.15rem var(--serif);color:var(--teal);margin:0 0 4px}
+.sw{display:flex;gap:10px;flex-wrap:wrap}
+.swatch{width:38px;height:38px;border-radius:50%;border:3px solid #fff;background:linear-gradient(135deg,var(--a) 50%,var(--b) 50%);box-shadow:0 0 0 1px rgba(0,0,0,.25);cursor:pointer;padding:0}
+.swatch[aria-pressed=true]{box-shadow:0 0 0 3px var(--ink)}
+.ds{display:flex;gap:8px;flex-wrap:wrap}
+.ds button,.set .reset{font:700 .9rem var(--sans);padding:7px 14px;border-radius:8px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer}
+.ds button[aria-pressed=true]{background:var(--teal);color:#fff}
+.set .reset{margin-top:16px;border-color:var(--dust);color:var(--muted);font-weight:600}
+[dir=rtl] .gear{margin-left:0;margin-right:8px}
+[dir=rtl] .set{right:auto;left:16px}
+/* colour themes */
+html[data-theme=midnight]{--teal:#14213D;--teal-deep:#0b1428;--dust:#CDD3E0;--dust-2:#E8EBF2;--mint:#7FB2FF;--glow:#25407a;--ink:#0d1730;--muted:#55607a;--coral:#4a587a;--sky:#aab3c7}
+html[data-theme=forest]{--teal:#1B4332;--teal-deep:#10281e;--dust:#CFD6CC;--dust-2:#E9EDE6;--mint:#95D5B2;--glow:#2d6a4f;--ink:#10281e;--muted:#55695d;--coral:#4c6a58;--sky:#aebaa9}
+html[data-theme=plum]{--teal:#3B1F4B;--teal-deep:#26122f;--dust:#D6CDD9;--dust-2:#EEE9F0;--mint:#E0AAFF;--glow:#5a3375;--ink:#26122f;--muted:#6b5876;--coral:#6a4f7a;--sky:#bdb2c3}
+html[data-theme=charcoal]{--teal:#23292B;--teal-deep:#151a1c;--dust:#CFD2D3;--dust-2:#ECEEEE;--mint:#7BD0C0;--glow:#3a4448;--ink:#151a1c;--muted:#5a6366;--coral:#566266;--sky:#b4babc}
+html[data-theme=desert]{--teal:#5C3D2E;--teal-deep:#3b2619;--dust:#D9D1C7;--dust-2:#F0EBE4;--mint:#F0B67F;--glow:#7a5240;--ink:#3b2619;--muted:#7a665a;--coral:#7a5c4c;--sky:#c3b8ab}
+html[data-theme=skyblue]{--teal:#23292B;--teal-deep:#151a1c;--dust:#CFD2D3;--dust-2:#ECEEEE;--mint:#93B7BE;--glow:#3a4448;--ink:#151a1c;--muted:#5a6366;--coral:#566266;--sky:#b4babc}
+html[data-theme=sand]{--teal:#23292B;--teal-deep:#151a1c;--dust:#CFD2D3;--dust-2:#ECEEEE;--mint:#D5C7BC;--glow:#3a4448;--ink:#151a1c;--muted:#5a6366;--coral:#566266;--sky:#b4babc}
+
+/* design styles */
+html[data-design=sharp] :is(.card,.box,.facts,.quotes,.fun div,.btn,.lang,.pill,.tag,.chip,.links a,.badge,.ds button,.set,.swatch){border-radius:2px}
+html[data-design=sharp] :is(.card,.box,.facts){border:2px solid var(--teal)}
+html[data-design=sharp] .fun div{border:2px solid var(--teal-deep)}
+html[data-design=soft] :is(.card,.box,.facts){border-radius:28px;box-shadow:0 14px 36px rgba(0,0,0,.14)}
+html[data-design=soft] .fun div{border-radius:28px}
+html[data-design=soft] .quotes{border-radius:36px}
+html[data-design=soft] :is(.btn,.links a,.chip,.ds button){border-radius:99px}
+/* Arabic / RTL */
+[dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] .logo,[dir=rtl] .hand,[dir=rtl] .q blockquote,[dir=rtl] input,[dir=rtl] textarea,[dir=rtl] button,[dir=rtl] .pill,[dir=rtl] .btn{font-family:"Cairo","Segoe UI",Tahoma,sans-serif}
+[dir=rtl] *{letter-spacing:0 !important}
+[dir=rtl] body{line-height:1.85}
+[dir=rtl] h1{line-height:1.3}
+[dir=rtl] .hand{font-size:1.3rem}
+[dir=rtl] .bar nav a{margin:0 0 0 20px}
+[dir=rtl] .lang{margin-left:0;margin-right:6px}
+[dir=rtl] .tl{border-left:0;border-right:3px solid var(--teal);margin-left:0;margin-right:6px}
+[dir=rtl] .job{padding:0 30px 30px 0}
+[dir=rtl] .job::before{left:auto;right:-11px}
+[dir=rtl] .soft li{border-left:0;border-right:4px solid var(--c);padding-left:0;padding-right:12px}
+[dir=rtl] .creds{padding-left:0;padding-right:20px}
+[dir=rtl] .badge{margin-left:0;margin-right:8px}
+[dir=rtl] body *{font-family:"Cairo","Segoe UI",Tahoma,sans-serif}
+[dir=rtl] body{text-rendering:optimizeLegibility;font-kerning:normal}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] .q blockquote,[dir=rtl] .logo{line-height:1.6;padding-block:.08em;overflow:visible}
+[dir=rtl] h1{line-height:1.4}
+[dir=rtl] .bar nav a,[dir=rtl] .lang,[dir=rtl] .btn,[dir=rtl] .pill,[dir=rtl] .tag,[dir=rtl] .chip,[dir=rtl] .badge,[dir=rtl] .links a{line-height:1.8}
+[dir=rtl] .bar nav a{display:inline-block;padding:3px 2px;font-size:1rem;overflow:visible}
+[dir=rtl] .bar .wrap{padding-top:10px;padding-bottom:10px}
+@media (max-width:860px){
+  .hero .grid,.about,.two,.cgrid,.projects{grid-template-columns:1fr}
+  .proof .wrap,.fun{grid-template-columns:repeat(2,1fr)}
+  .bar nav a{margin:0 14px 0 0}
+  [dir=rtl] .bar nav a{margin:0 0 0 14px}
+  .net{max-width:380px}
+  .quotes{padding:28px 24px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  .link,.ring,.node{animation:none}
+  html{scroll-behavior:auto}
+  .q,.q.on{transition:none;transform:none}
+}
+
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top">Hamza Al-Adawi</a>
+    <div class="barctrls">
+      <button class="lang" id="lang" type="button" aria-label="Switch language">ع</button>
+      <button class="lang gear" id="gear" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="set"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.2"/><circle cx="8" cy="17" r="2.2"/></svg><span>Settings</span></button>
+      <button class="burger" id="burger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="mainnav" aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+    <nav aria-label="Main" id="mainnav">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#beyond">Beyond work</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap grid">
+    <div>
+      <h1>Hamza Suleiman<br>Al-Adawi</h1>
+      <div class="tags">
+        <span class="pill p2">Cybersecurity</span><span class="pill p3">Gaming Development</span><span class="pill p4">Research and Innovation</span>
+      </div>
+      <p>I'm a Computer Engineering student building secure networks and practical products. I combine <b>cybersecurity expertise with a founder's focus on impact.</b></p>
+      <div class="actions">
+        <a class="btn fill" href="#projects">See my projects</a>
+        <a class="btn coral" href="#contact">Say hello</a>
+      </div>
+      <div class="hand note">scroll down &#8595;</div>
+    </div>
+
+    <aside class="quotes" aria-label="Words I live by" aria-roledescription="carousel">
+      <h2>Words I live by</h2>
+      <div class="qstage" aria-live="off">
+        <figure class="q on" aria-hidden="false"><blockquote>&ldquo;The strong person is not the one who overpowers others, but the one who controls himself when angry.&rdquo;</blockquote><figcaption><b>Prophet Muhammad ﷺ</b><span>Sahih al-Bukhari</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Imagination is more important than knowledge. Knowledge is limited, while imagination embraces the entire world.&rdquo;</blockquote><figcaption><b>Albert Einstein</b><span>On creativity</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;The impediment to action advances action. What stands in the way becomes the way.&rdquo;</blockquote><figcaption><b>Marcus Aurelius</b><span>Meditations</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Whoever takes a path in search of knowledge, Allah will make easy for him a path to Paradise.&rdquo;</blockquote><figcaption><b>Prophet Muhammad ﷺ</b><span>Sahih Muslim</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Life is like riding a bicycle. To keep your balance, you must keep moving.&rdquo;</blockquote><figcaption><b>Albert Einstein</b><span>Letter to his son Eduard</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Education is the most powerful weapon which you can use to change the world.&rdquo;</blockquote><figcaption><b>Nelson Mandela</b><span>Speech, 2003</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Know the enemy and know yourself, and in a hundred battles you will never be in peril.&rdquo;</blockquote><figcaption><b>Sun Tzu</b><span>The Art of War</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Security is a process, not a product.&rdquo;</blockquote><figcaption><b>Bruce Schneier</b><span>Security expert</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;A journey of a thousand miles begins with a single step.&rdquo;</blockquote><figcaption><b>Lao Tzu</b><span>Tao Te Ching</span></figcaption></figure>
+        <figure class="q" aria-hidden="true"><blockquote>&ldquo;Your time is limited, so don't waste it living someone else's life.&rdquo;</blockquote><figcaption><b>Steve Jobs</b><span>Stanford commencement, 2005</span></figcaption></figure>
+      </div>
+      <div class="qdots" role="group" aria-label="Choose a quote"><button type="button" aria-label="Quote 1" aria-current="true"></button><button type="button" aria-label="Quote 2"></button><button type="button" aria-label="Quote 3"></button><button type="button" aria-label="Quote 4"></button><button type="button" aria-label="Quote 5"></button><button type="button" aria-label="Quote 6"></button><button type="button" aria-label="Quote 7"></button><button type="button" aria-label="Quote 8"></button><button type="button" aria-label="Quote 9"></button><button type="button" aria-label="Quote 10"></button></div>
+    </aside>
+  </div>
+</header>
+
+<section id="about" class="light">
+  <div class="wrap about">
+    <div>
+      <div class="head"><h2>Engineering with curiosity. Security with purpose.</h2></div>
+      <p>I'm Hamza, a Computer Engineering student focused on cybersecurity, with hands-on experience in network security, full-stack development, and entrepreneurship.</p>
+      <p>I founded <b>Sahro</b>, a gamified learning platform, and I'm currently a networking intern on the Middle East College upgrade project.</p>
+      <p>I enjoy working with people through public speaking, mentoring, and technical writing. Outside work, I enjoy running, chess, and football.</p>
+    </div>
+    <dl class="facts">
+      <dt>Based in</dt><dd>Muscat, Oman</dd>
+      <dt>Focus</dt><dd>Cybersecurity &amp; systems</dd>
+      <dt>Education</dt><dd>BEng (Hons) Computer Engineering, Middle East College</dd>
+      <dt>Languages</dt><dd>Arabic, English</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="experience" class="white">
+  <div class="wrap">
+    <div class="head"><h2>Experience</h2></div>
+    <div class="tl">
+      <div class="job" style="--c:var(--mint)"><div class="when">Present</div>
+        <h3>Networking Intern <span class="badge">Current</span></h3><div class="org">AHAT · Middle East College network upgrade</div>
+        <p>Supporting the Middle East College network upgrade and working on campus infrastructure.</p></div>
+
+      <div class="job" style="--c:var(--mint)"><div class="when">Oct 2025 – Present · Muscat</div>
+        <h3>Founder &amp; Chief Executive Officer <span class="badge">Founder</span></h3><div class="org">Sahro · EdTech startup</div>
+        <p>Founded Sahro, a gamified learning platform used by 30+ students. I secured formal incubation with Middle East College and Riyada Oman, and lead a six-person team using an intranet I built.</p></div>
+
+      <div class="job" style="--c:var(--sky)"><div class="when">Jun 2026 – Aug 2026 · Hybrid</div>
+        <h3>Full-Stack Developer Intern</h3><div class="org">Rihal · Spark to Code Program</div>
+        <p>Completed intensive full-stack training in C#, HTML, CSS, and JavaScript. Led the final project team, coordinating tasks and delivering on time.</p></div>
+
+      <div class="job" style="--c:var(--sky)"><div class="when">Apr 2026 – May 2026 · Muscat</div>
+        <h3>IT Department Trainee</h3><div class="org">Consumer Protection Authority (CPA)</div>
+        <p>Handled Active Directory tasks, monitored network and database systems, and supported the help desk. Presented on games and AI in learning at the annual IT Day.</p></div>
+
+      <div class="job" style="--c:var(--sky)"><div class="when">Mar 2026 – Jun 2026 · Muscat</div>
+        <h3>Sales &amp; Technical Support Trainee</h3><div class="org">IHUB Mobiles</div>
+        <p>Supported sales and hardware repair operations, contributing to more than 20 completed customer sales.</p></div>
+
+      <div class="job" style="--c:var(--sky)"><div class="when">Sep 2025 – Nov 2025</div>
+        <h3>President</h3><div class="org">ISACA Student Chapter, Middle East College</div>
+        <p>Led the student chapter and organised cybersecurity awareness events and technical activities across campus.</p></div>
+
+      <div class="job" style="--c:var(--sky)"><div class="when">Nov 2024 – Mar 2026</div>
+        <h3>Student Mentor</h3><div class="org">Google Developer Groups, Middle East College</div>
+        <p>Mentored more than 50 students across 10+ technical workshops on software development and IT fundamentals.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="light">
+  <div class="wrap">
+    <div class="head"><h2>Projects</h2><p>Things I've built, from secure networks to full-stack apps.</p></div>
+    <div class="projects">
+      <article class="card" style="--c:var(--mint)"><div class="yr">2024 · Diploma project</div><h3>Enterprise Network Security &amp; Cybersecurity Awareness</h3>
+        <p>Designed a secure enterprise network in Cisco Packet Tracer using VLANs, ACLs, and SSH. Added attack simulations, video tutorials, and an interactive cybersecurity dashboard.</p>
+        <div class="tagrow"><span class="tag">Packet Tracer</span><span class="tag">VLANs</span><span class="tag">ACLs</span><span class="tag">SSH</span></div>
+        <div class="links"><a class="fill" href="https://github.com/Hamza-Al-Adawi/Enhancing_National_University_Network-Attack_Simulation_Cybersecurity_Awareness" target="_blank" rel="noopener">View on GitHub</a></div></article>
+
+      <article class="card" style="--c:var(--coral)"><div class="yr">2026 · Spark to Code</div><h3>Rihal Airways: Flight Management System</h3>
+        <p>Built a C#/.NET flight booking and management system with role-based access and a REST API. Owned the front end and led the final presentation.</p>
+        <div class="tagrow"><span class="tag">C# / .NET</span><span class="tag">REST API</span><span class="tag">Git &amp; GitHub</span><span class="tag">Team lead</span></div>
+        <div class="links"><a class="fill" href="https://github.com/SparkToCode2026/Rihla-Airways-Airline-Booking-Flight-Management" target="_blank" rel="noopener">View on GitHub</a></div></article>
+
+      <article class="card" style="--c:var(--amber)"><div class="yr">2025 – Present</div><h3>Sahro Learning Platform</h3>
+        <p>A gamified learning platform that helps people understand difficult concepts. Used by 30+ students so far.</p>
+        <div class="tagrow"><span class="tag">EdTech</span><span class="tag">Leadership</span><span class="tag">Learning design</span></div>
+        <div class="links"><a class="fill" href="https://yamen-aldhanki.github.io/SA7RO/" target="_blank" rel="noopener">Visit Sahro</a></div></article>
+
+      <article class="card" style="--c:var(--sky)"><div class="yr">2026</div><h3>HabitFlow</h3>
+        <p>A full-stack web app for building and tracking daily habits, with positive user feedback on its productivity impact.</p>
+        <div class="tagrow"><span class="tag">Full-stack</span><span class="tag">Product design</span><span class="tag">Web app</span></div>
+        <div class="links"><a class="fill" href="https://hamza-al-adawi.github.io/HabitFlow/" target="_blank" rel="noopener">Live demo</a></div></article>
+
+      <article class="card" style="--c:var(--mint)"><div class="yr">2026</div><h3>MEC CGPA Calculator</h3>
+        <p>Co-developed a web tool that helps Middle East College students accurately predict and calculate their CGPA.</p>
+        <div class="tagrow"><span class="tag">Web tool</span><span class="tag">Teamwork</span></div>
+        <div class="links"><a class="fill" href="https://yamen-aldhanki.github.io/MEC-CGPA-Calculator/" target="_blank" rel="noopener">Open tool</a></div></article>
+    </div>
+    <p style="margin-top:24px"><a href="https://github.com/Hamza-Al-Adawi" target="_blank" rel="noopener"><b>See all repositories on GitHub</b></a></p>
+  </div>
+</section>
+
+<section id="skills" class="white">
+  <div class="wrap">
+    <div class="head"><h2>Skills</h2><p>Technical depth in security and networking, backed by the people skills to lead and teach.</p></div>
+    <div class="two">
+      <div class="box">
+        <h3>Technical skills</h3>
+        <div class="grp"><h4>Security &amp; networking</h4><div class="chips">
+          <span class="chip core">Network Security</span><span class="chip core">Enterprise Network Design</span><span class="chip core">VLANs</span><span class="chip core">ACLs</span><span class="chip core">SSH</span><span class="chip core">Ethical Hacking</span><span class="chip core">Digital Forensics</span><span class="chip core">Cryptography</span><span class="chip core">Wireshark</span><span class="chip core">Network Traffic Analysis</span><span class="chip core">Active Directory</span></div></div>
+        <div class="grp"><h4>Programming &amp; development</h4><div class="chips">
+          <span class="chip">Python</span><span class="chip">C#</span><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Full-Stack Web</span><span class="chip">Linux Administration</span><span class="chip">Git</span></div></div>
+        <div class="grp"><h4>Tools &amp; platforms</h4><div class="chips">
+          <span class="chip">Cisco Packet Tracer</span><span class="chip">GitHub Copilot</span><span class="chip">AI Development Tools</span><span class="chip">Windows Server</span></div></div>
+      </div>
+      <div class="box dark">
+        <h3>Soft skills</h3>
+        <ul class="soft">
+          <li style="--c:var(--mint)"><b>Problem solving</b><span>Break down complex network and software issues into clear, testable solutions.</span></li>
+          <li style="--c:var(--mint)"><b>Team structure</b><span>Organise roles and workflows for a 6-person team at Sahro and a dev team at Rihal.</span></li>
+          <li style="--c:var(--mint)"><b>Management</b><span>Coordinated task allocation, priorities, and on-time delivery.</span></li>
+          <li style="--c:var(--mint)"><b>Documentation</b><span>Produce clear technical documentation, tutorials, and project reports.</span></li>
+          <li style="--c:var(--mint)"><b>Research</b><span>Investigate emerging security and AI topics, including a student research conference case study.</span></li>
+          <li style="--c:var(--mint)"><b>Communication</b><span>Presented at CPA's IT Day and mentored 50+ students across 10+ workshops.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box" style="margin-top:28px">
+      <h3>Credentials &amp; community</h3>
+      <ul class="creds">
+        <li><strong>Dean's List Honoree 2024</strong>, first class</li>
+        <li>CCNA – Cisco Certified Network Associate</li>
+        <li>NVIDIA – Fundamentals of Deep Learning</li>
+        <li>7th Student Research Conference – "AI &amp; Human Skills" case study</li>
+        <li>BEng (Hons) Computer Engineering, Cybersecurity Pathway, Middle East College, awarded by Coventry University UK (2023–2027)</li>
+        <li>President, ISACA Student Chapter · Mentor, Google Developer Groups</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="beyond" class="light">
+  <div class="wrap">
+    <div class="head"><h2>Beyond the screen</h2><p>The things that keep me balanced and make me a better teammate.</p></div>
+    <div class="fun">
+      <div class="f1"><h3>Football</h3><p>I love playing, and it's where I learned a lot about teamwork.</p></div>
+      <div class="f2"><h3>Working with people</h3><p>My best work happens in a team, building and learning together.</p></div>
+      <div class="f3"><h3>Reading &amp; writing</h3><p>I love reading, and I enjoy turning ideas into words people can follow.</p></div>
+      <div class="f4"><h3>Public speaking</h3><p>I like standing up, sharing ideas, and helping others learn.</p></div>
+      <div class="f5"><h3>Runner</h3><p>Running clears my head and teaches me patience and discipline.</p></div>
+      <div class="f6"><h3>Chess player</h3><p>Chess trains me to stay calm and think a few moves ahead.</p></div>
+      <div class="f7"><h3>AI learner</h3><p>I keep exploring how AI works and how to use it to build and learn better.</p></div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="head"><h2>Let's build something useful together.</h2><p>Have an idea, role, or collaboration in mind? I would be glad to hear from you.</p></div>
+    <div class="cgrid">
+      <ul class="clist">
+        <li><span>Email</span><a href="mailto:adawihsa@gmail.com">adawihsa@gmail.com</a></li>
+        <li><span>Phone</span><a href="tel:+96895299353">+968 95299353</a></li>
+        <li><span>GitHub</span><a href="https://github.com/Hamza-Al-Adawi">Hamza-Al-Adawi</a></li>
+        <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/hamza-al-adawi-150029307">hamza-al-adawi-150029307</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<div class="set" id="set" role="dialog" aria-label="Settings" hidden>
+  <div class="sh big">Settings</div>
+  <div class="sh">Colors</div>
+  <div class="sw" role="group" aria-label="Colors">
+    <button type="button" class="swatch" data-theme="teal" aria-label="Teal" title="Teal" style="--a:#0B3C49;--b:#5FD4BC"></button>
+    <button type="button" class="swatch" data-theme="midnight" aria-label="Midnight" title="Midnight" style="--a:#14213D;--b:#7FB2FF"></button>
+    <button type="button" class="swatch" data-theme="forest" aria-label="Forest" title="Forest" style="--a:#1B4332;--b:#95D5B2"></button>
+    <button type="button" class="swatch" data-theme="plum" aria-label="Plum" title="Plum" style="--a:#3B1F4B;--b:#E0AAFF"></button>
+    <button type="button" class="swatch" data-theme="charcoal" aria-label="Charcoal" title="Charcoal" style="--a:#23292B;--b:#7BD0C0"></button>
+    <button type="button" class="swatch" data-theme="desert" aria-label="Desert" title="Desert" style="--a:#5C3D2E;--b:#F0B67F"></button>
+    <button type="button" class="swatch" data-theme="skyblue" aria-label="Sky blue" title="Sky blue" style="--a:#23292B;--b:#93B7BE"></button>
+    <button type="button" class="swatch" data-theme="sand" aria-label="Sand" title="Sand" style="--a:#23292B;--b:#D5C7BC"></button>
+  </div>
+  <div class="sh">Design</div>
+  <div class="ds" role="group" aria-label="Design">
+    <button type="button" data-design="classic">Classic</button>
+    <button type="button" data-design="sharp">Sharp</button>
+    <button type="button" data-design="soft">Soft</button>
+  </div>
+  <button type="button" class="reset" id="reset">Reset</button>
+</div>
+
+<footer><div class="wrap">© 2026 Hamza Al-Adawi</div></footer>
+
+
+<script>
+// Settings dropdown: pick a colour theme and a design style. Choices are remembered on this device.
+(function(){
+  var root=document.documentElement, gear=document.getElementById('gear'), panel=document.getElementById('set');
+  var state={theme:'charcoal',design:'soft'};
+  function paint(){
+    if(state.theme==='teal') root.removeAttribute('data-theme'); else root.setAttribute('data-theme',state.theme);
+    root.setAttribute('data-design',state.design);
+    panel.querySelectorAll('[data-theme]').forEach(function(b){ b.setAttribute('aria-pressed',b.dataset.theme===state.theme); });
+    panel.querySelectorAll('[data-design]').forEach(function(b){ b.setAttribute('aria-pressed',b.dataset.design===state.design); });
+    try{ localStorage.setItem('portfolio-settings-v2',JSON.stringify(state)); }catch(e){}
+  }
+  function open(o){
+    if(o){ panel.style.top=(gear.getBoundingClientRect().bottom+10)+'px'; }
+    panel.hidden=!o; gear.setAttribute('aria-expanded',o);
+  }
+  gear.addEventListener('click',function(e){ e.stopPropagation(); open(panel.hidden); });
+  panel.addEventListener('click',function(e){
+    e.stopPropagation();
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.dataset.theme) state.theme=b.dataset.theme;
+    else if(b.dataset.design) state.design=b.dataset.design;
+    else if(b.id==='reset') state={theme:'charcoal',design:'soft'};
+    else return;
+    paint();
+  });
+  document.addEventListener('click',function(){ if(!panel.hidden) open(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !panel.hidden){ open(false); gear.focus(); } });
+  try{ var saved=JSON.parse(localStorage.getItem('portfolio-settings-v2')||'null'); if(saved&&saved.theme&&saved.design) state=saved; }catch(e){}
+  paint();
+})();
+</script>
+<script>
+// English / Arabic switch: swaps each text piece for its Arabic version and flips the page to right-to-left.
+(function(){
+  var AR={"Hamza Al-Adawi | Cybersecurity · Founder of Sahro": "حمزة العدوي | الأمن السيبراني · مؤسس سحرو", "Hamza Al-Adawi": "حمزة العدوي", "About": "نبذة عني", "Experience": "الخبرات", "Projects": "المشاريع", "Skills": "المهارات", "Beyond work": "خارج العمل", "Contact": "تواصل", "Hamza": "حمزة", "Al-Adawi": "العدوي", "Cybersecurity": "الأمن السيبراني", "Founder of Sahro": "مؤسس سحرو", "See my projects": "شاهد مشاريعي", "Say hello": "تواصل معي", "Engineering with curiosity. Security with purpose.": "هندسة بشغف الفضول، وأمن له هدف.", "I'm Hamza, a Computer Engineering student specialising in cybersecurity, with hands-on experience across network security, full-stack development, and entrepreneurship.": "أنا حمزة، طالب هندسة حاسوب متخصص في الأمن السيبراني، ولديّ خبرة عملية في أمن الشبكات، وتطوير الويب المتكامل، وريادة الأعمال.", "I founded": "أسّست", "Sahro": "سحرو", "Based in": "أقيم في", "Muscat, Oman": "مسقط، عُمان", "Focus": "التخصص", "Cybersecurity & systems": "الأمن السيبراني والأنظمة", "Education": "التعليم", "BEng (Hons) Computer Engineering, Middle East College": "بكالوريوس هندسة الحاسوب (مرتبة الشرف)، كلية الشرق الأوسط", "Languages": "اللغات", "Present": "حتى الآن", "Current": "حاليًا", "AHAT · Middle East College network upgrade": "AHAT · ترقية شبكة كلية الشرق الأوسط", "Part of the team upgrading the Middle East College network, working on real campus infrastructure.": "عضو في الفريق المسؤول عن ترقية شبكة كلية الشرق الأوسط، أعمل على بنية تحتية حقيقية داخل الحرم الجامعي.", "Oct 2025 – Present · Muscat": "أكتوبر 2025 – حتى الآن · مسقط", "Founder & Chief Executive Officer": "المؤسس والرئيس التنفيذي", "Founder": "مؤسس", "Sahro · EdTech startup": "سحرو · شركة ناشئة في التقنية التعليمية", "Jun 2026 – Aug 2026 · Hybrid": "يونيو 2026 – أغسطس 2026 · هجين", "Full-Stack Developer Intern": "متدرّب مطوّر ويب متكامل", "Rihal · Spark to Code Program": "رحال · برنامج Spark to Code", "Completed an intensive full-stack program covering C#, HTML, CSS, and JavaScript, finishing all assigned modules. Led a development team through the final project, coordinating task allocation and delivering on schedule.": "أكملت برنامجًا مكثفًا في تطوير الويب المتكامل شمل لغات C# وHTML وCSS وJavaScript، وأنهيت جميع الوحدات المطلوبة. قدت فريق تطوير في المشروع الختامي، ونسّقت توزيع المهام وسلّمنا العمل في الموعد المحدد.", "Apr 2026 – May 2026 · Muscat": "أبريل 2026 – مايو 2026 · مسقط", "IT Department Trainee": "متدرّب في قسم تقنية المعلومات", "Consumer Protection Authority (CPA)": "هيئة حماية المستهلك (CPA)", "Administered Active Directory tasks, monitored network and database systems with enterprise tools, and supported the help desk across departments. Presented on the impact of games and AI on learning at the annual IT Day.": "تولّيت مهام إدارة Active Directory، وراقبت أنظمة الشبكات وقواعد البيانات باستخدام أدوات مؤسسية، وقدّمت الدعم الفني لمختلف الأقسام. قدّمت أيضًا عرضًا عن أثر الألعاب والذكاء الاصطناعي على التعلّم في يوم تقنية المعلومات السنوي.", "Mar 2026 – Jun 2026 · Muscat": "مارس 2026 – يونيو 2026 · مسقط", "Sales & Technical Support Trainee": "متدرّب مبيعات ودعم فني", "IHUB Mobiles": "آي هب موبايلز", "Supported sales and hardware repair operations, contributing to more than 20 completed customer sales.": "دعمت عمليات المبيعات وصيانة الأجهزة، وأسهمت في إتمام أكثر من 20 عملية بيع للعملاء.", "Sep 2025 – Nov 2025": "سبتمبر 2025 – نوفمبر 2025", "President": "الرئيس", "ISACA Student Chapter, Middle East College": "فرع ISACA الطلابي، كلية الشرق الأوسط", "Led the student chapter and organised cybersecurity awareness events and technical activities across campus.": "قدت الفرع الطلابي ونظّمت فعاليات للتوعية بالأمن السيبراني وأنشطة تقنية في الحرم الجامعي.", "Nov 2024 – Mar 2026": "نوفمبر 2024 – مارس 2026", "Student Mentor": "مرشد طلابي", "Google Developer Groups, Middle East College": "مجموعات مطوري Google، كلية الشرق الأوسط", "Mentored more than 50 students across 10+ technical workshops on software development and IT fundamentals.": "أرشدت أكثر من 50 طالبًا في أكثر من 10 ورش عمل تقنية في تطوير البرمجيات وأساسيات تقنية المعلومات.", "Things I've built, from secure networks to full-stack apps.": "أشياء بنيتها، من شبكات آمنة إلى تطبيقات ويب متكاملة.", "2024 · Diploma project": "2024 · مشروع الدبلوم", "Enterprise Network Security & Cybersecurity Awareness": "أمن شبكات المؤسسات والتوعية بالأمن السيبراني", "Architected a secure enterprise network in Cisco Packet Tracer using VLANs, ACLs, and SSH management. Built attack simulation labs and produced video tutorials with an interactive dashboard to show how cybersecurity works.": "صمّمت شبكة مؤسسية آمنة باستخدام Cisco Packet Tracer، معتمدًا على الشبكات الافتراضية (VLANs) وقوائم التحكم بالوصول (ACLs) وإدارة SSH. وبنيت مختبرات لمحاكاة الهجمات، وأنتجت دروسًا مرئية مع لوحة تفاعلية لشرح آلية عمل الأمن السيبراني.", "View on GitHub": "عرض على GitHub", "Rihal Airways: Flight Management System": "رحال إيرويز: نظام إدارة الرحلات الجوية", "A full-stack flight booking and management system with role-based access for admin, staff, and passengers, built in C# / .NET with a REST API. I owned the front end and led the final presentation.": "نظام متكامل لحجز الرحلات الجوية وإدارتها، بصلاحيات وصول مختلفة للمشرف والموظفين والركاب، مبني بلغة C# وإطار .NET مع واجهة REST API. تولّيت تطوير الواجهة الأمامية وقدت العرض الختامي للمشروع.", "Team lead": "قيادة الفريق", "2025 – Present": "2025 – حتى الآن", "Sahro Learning Platform": "منصة سحرو التعليمية", "EdTech": "تقنية تعليمية", "Leadership": "القيادة", "Learning design": "تصميم التعلّم", "Visit Sahro": "زيارة سحرو", "A full-stack web app for building and tracking daily habits, with positive user feedback on its productivity impact.": "تطبيق ويب متكامل لبناء العادات اليومية وتتبعها، وقد لقي تقييمًا إيجابيًا من المستخدمين حول أثره في رفع الإنتاجية.", "Full-stack": "ويب متكامل", "Product design": "تصميم المنتج", "Web app": "تطبيق ويب", "Live demo": "تجربة مباشرة", "MEC CGPA Calculator": "حاسبة المعدل التراكمي لكلية الشرق الأوسط", "Co-developed a web tool that helps Middle East College students accurately predict and calculate their CGPA.": "شاركت في تطوير أداة ويب تساعد طلاب كلية الشرق الأوسط على توقّع معدلهم التراكمي وحسابه بدقة.", "Web tool": "أداة ويب", "Teamwork": "العمل الجماعي", "Open tool": "فتح الأداة", "See all repositories on GitHub": "شاهد جميع المستودعات على GitHub", "Technical depth in security and networking, backed by the people skills to lead and teach.": "عمق تقني في الأمن والشبكات، مدعوم بمهارات شخصية تؤهّلني للقيادة والتعليم.", "Technical skills": "المهارات التقنية", "Security & networking": "الأمن والشبكات", "Network Security": "أمن الشبكات", "Enterprise Network Design": "تصميم شبكات المؤسسات", "Ethical Hacking": "الاختراق الأخلاقي", "Digital Forensics": "التحليل الجنائي الرقمي", "Cryptography": "التشفير", "Network Traffic Analysis": "تحليل حركة الشبكة", "Programming & development": "البرمجة والتطوير", "Full-Stack Web": "تطوير ويب متكامل", "Linux Administration": "إدارة لينكس", "Tools & platforms": "الأدوات والمنصات", "AI Development Tools": "أدوات التطوير بالذكاء الاصطناعي", "Soft skills": "المهارات الشخصية", "Public speaking": "التحدث أمام الجمهور", "Credentials & community": "الشهادات والمجتمع", "Dean's List Honoree 2024": "مُكرَّم في قائمة العميد 2024", ", first class": "، مرتبة الشرف الأولى", "CCNA – Cisco Certified Network Associate": "CCNA – شهادة Cisco لمهندس الشبكات المعتمد", "NVIDIA – Fundamentals of Deep Learning": "NVIDIA – أساسيات التعلّم العميق", "7th Student Research Conference – \"AI & Human Skills\" case study": "المؤتمر الطلابي السابع للبحوث – دراسة حالة \"الذكاء الاصطناعي والمهارات الإنسانية\"", "BEng (Hons) Computer Engineering, Cybersecurity Pathway, Middle East College, awarded by Coventry University UK (2023–2027)": "بكالوريوس (مرتبة الشرف) هندسة الحاسوب، مسار الأمن السيبراني، كلية الشرق الأوسط، بشهادة جامعة كوفنتري بالمملكة المتحدة (2023–2027)", "President, ISACA Student Chapter · Mentor, Google Developer Groups": "رئيس فرع ISACA الطلابي · مرشد في مجموعات مطوري Google", "Beyond the screen": "خارج الشاشة", "The things that keep me balanced and make me a better teammate.": "الأمور التي تحفظ توازني وتجعلني زميلًا أفضل.", "Football": "كرة القدم", "I love playing, and it's where I learned a lot about teamwork.": "أحب اللعب، ومنه تعلّمتُ الكثير عن العمل الجماعي.", "Working with people": "العمل مع الناس", "My best work happens in a team, building and learning together.": "أفضل أعمالي تحدث ضمن فريق، نبني ونتعلّم معًا.", "Reading & writing": "القراءة والكتابة", "I love reading, and I enjoy turning ideas into words people can follow.": "أحب القراءة، وأستمتع بتحويل الأفكار إلى كلمات يسهل على الناس فهمها.", "I like standing up, sharing ideas, and helping others learn.": "أحب التحدث أمام الناس ومشاركة أفكاري ومساعدة الآخرين على التعلّم.", "Let's build something useful together.": "لنبنِ شيئًا مفيدًا معًا.", "Have an idea, role, or collaboration in mind? I would be glad to hear from you.": "هل لديك فكرة، فرصة عمل، أو تعاون في بالك؟ يسعدني أن أسمع منك.", "Email": "البريد الإلكتروني", "Phone": "الهاتف", "Your name": "اسمك", "Your email": "بريدك الإلكتروني", "Subject": "الموضوع", "Message": "الرسالة", "Send message": "إرسال الرسالة", "© 2026 Hamza Al-Adawi": "© 2026 حمزة العدوي", "Runner": "عدّاء", "Running clears my head and teaches me patience and discipline.": "الجري يصفّي ذهني ويعلّمني الصبر والانضباط.", "Chess player": "لاعب شطرنج", "Chess trains me to stay calm and think a few moves ahead.": "الشطرنج يدرّبني على الهدوء والتفكير بعدة خطوات مسبقًا.", "AI learner": "شغوف بالذكاء الاصطناعي", "I keep exploring how AI works and how to use it to build and learn better.": "أواصل استكشاف آلية عمل الذكاء الاصطناعي، وكيفية استخدامه لأبني وأتعلّم بشكل أفضل.", ", a gamified platform that makes learning easier across different fields, and I'm currently a networking intern on the Middle East College network upgrade.": "، وهي منصة تعتمد على أسلوب الألعاب لتسهيل التعلّم في مجالات مختلفة، وأعمل حاليًا متدرّب شبكات في مشروع ترقية شبكة كلية الشرق الأوسط.", "Founded an EdTech startup that makes learning easier across different fields through an original gamified learning platform, helping over 30 students master difficult concepts within months of launch. Secured a formal incubation partnership with Middle East College and Riyada Oman, with access to the campus incubation center. I lead a 6-person team, managing operations and progress through a self-built internal intranet.": "أسّست شركة ناشئة في التقنية التعليمية تسهّل التعلّم في مجالات مختلفة عبر منصة أصلية تعتمد على أسلوب الألعاب، وساعدت أكثر من 30 طالبًا على إتقان مفاهيم صعبة خلال أشهر من الإطلاق. حصلت على شراكة احتضان رسمية مع كلية الشرق الأوسط وريادة عُمان، مع إمكانية الوصول إلى مركز الاحتضان في الحرم الجامعي. أقود فريقًا من 6 أشخاص، وأدير العمليات وسير العمل عبر شبكة داخلية طوّرتها بنفسي.", "An original gamified platform that helps learners understand difficult concepts across different fields. Over 30 students have used it so far.": "منصة أصلية تعتمد على أسلوب الألعاب تساعد المتعلّمين على فهم مفاهيم صعبة في مجالات مختلفة. استخدمها حتى الآن أكثر من 30 طالبًا.", "Settings": "الإعدادات", "Colors": "الألوان", "Design": "التصميم", "Classic": "كلاسيكي", "Sharp": "حادّ", "Soft": "ناعم", "Reset": "إعادة ضبط", "Tech & Business": "التقنية والأعمال", "I'm a computer engineering student who secures networks and builds products people actually use. I combine": "أنا طالب هندسة حاسوب، أؤمّن الشبكات وأبني منتجات يستخدمها الناس فعلًا. أجمع بين", "technical depth in cybersecurity with a founder's focus on business impact.": "العمق التقني في الأمن السيبراني وتركيز رائد الأعمال على الأثر التجاري.", "scroll down ↓": "مرّر للأسفل ↓", "I bring a collaborative, communication-driven approach to every project, backed by experience in public speaking, mentoring, and technical writing. Outside of work, I enjoy running, chess, and football.": "أتبنّى في كل مشروع نهجًا تعاونيًا قائمًا على التواصل، مدعومًا بخبرة في التحدث أمام الجمهور والإرشاد والكتابة التقنية. وخارج العمل، أستمتع بالجري والشطرنج وكرة القدم.", "Arabic, English": "العربية، الإنجليزية", "Problem solving": "حل المشكلات", "Team structure": "هيكلة الفرق", "Management": "الإدارة", "Documentation": "التوثيق", "Research": "البحث", "Communication": "التواصل", "Break down complex network and software issues into clear, testable solutions.": "تفكيك مشكلات الشبكات والبرمجيات المعقّدة إلى حلول واضحة وقابلة للاختبار.", "Organise roles and workflows for a 6-person team at Sahro and a dev team at Rihal.": "تنظيم الأدوار وسير العمل لفريق من 6 أشخاص في سحرو، وفريق تطوير في رحال.", "Coordinated task allocation, priorities, and on-time delivery.": "تنسيق توزيع المهام والأولويات والتسليم في الموعد المحدد.", "Produce clear technical documentation, tutorials, and project reports.": "إعداد وثائق تقنية ودروس وتقارير مشاريع واضحة.", "Investigate emerging security and AI topics, including a student research conference case study.": "دراسة مواضيع ناشئة في الأمن السيبراني والذكاء الاصطناعي، ضمن ذلك دراسة حالة قُدّمت في مؤتمر طلابي للبحوث.", "Presented at CPA's IT Day and mentored 50+ students across 10+ workshops.": "قدّمت عرضًا في يوم تقنية المعلومات بهيئة حماية المستهلك، وأرشدت أكثر من 50 طالبًا في أكثر من 10 ورش عمل.", "Words I live by": "كلمات أعيش بها", "Allah loves that when any of you does a job, he does it with excellence.": "إنّ الله يحبّ إذا عمل أحدكم عملًا أن يُتقنه.", "Prophet Muhammad ﷺ": "النبي محمد ﷺ", "Narrated by Al-Bayhaqi": "رواه البيهقي", "Life is like riding a bicycle. To keep your balance, you must keep moving.": "الحياة أشبه بركوب الدراجة؛ لكي تحافظ على توازنك، عليك أن تواصل التقدّم.", "Albert Einstein": "ألبرت أينشتاين", "Letter to his son, 1930": "من رسالة إلى ابنه، 1930", "If you start believing in your greatness, it is the death of your creativity.": "حين تبدأ بتصديق عظمتك، يكون ذلك إيذانًا بموت إبداعك.", "Marina Abramović": "مارينا أبراموفيتش", "Quoted in Ryan Holiday's Ego Is the Enemy": "ورد في كتاب رايان هوليداي «الأنا هي العدو»", "The impediment to action advances action. What stands in the way becomes the way.": "العائق أمام الفعل يدفعه إلى الأمام؛ وما يعترض الطريق يصبح هو الطريق نفسه.", "Marcus Aurelius": "ماركوس أوريليوس", "Meditations": "التأمّلات", "Efficiency is doing things right; effectiveness is doing the right things.": "الكفاءة أن تُنجز الأمور بالطريقة الصحيحة، أمّا الفاعلية فأن تُنجز الأمور الصحيحة.", "Peter Drucker": "بيتر دراكر", "Management thinker": "مفكّر في الإدارة", "Security is a process, not a product.": "الأمن عملية مستمرة، لا منتج يُشترى.", "Bruce Schneier": "بروس شناير", "Security technologist": "خبير تقنيات الأمن", "Networking Intern": "متدرّب شبكات", "Sahih Muslim": "صحيح مسلم", "“A journey of a thousand miles begins with a single step.”": "«رحلة الألف ميل تبدأ بخطوة واحدة.»", "Sahih al-Bukhari": "صحيح البخاري", "On creativity": "عن الإبداع", "Steve Jobs": "ستيف جوبز", "“Know the enemy and know yourself, and in a hundred battles you will never be in peril.”": "«اعرف عدوّك واعرف نفسك، فلن تُهزم في مئة معركة.»", "Lao Tzu": "لاو تزو", "Letter to his son Eduard": "رسالة إلى ابنه إدوارد", "“Education is the most powerful weapon which you can use to change the world.”": "«التعليم أقوى سلاح يمكنك استخدامه لتغيير العالم.»", "“Life is like riding a bicycle. To keep your balance, you must keep moving.”": "«الحياة أشبه بركوب الدراجة؛ لكي تحافظ على توازنك، عليك أن تواصل التقدّم.»", "“The impediment to action advances action. What stands in the way becomes the way.”": "«العائق أمام الفعل يدفعه إلى الأمام؛ وما يعترض الطريق يصبح هو الطريق نفسه.»", "The Art of War": "فن الحرب", "“Your time is limited, so don't waste it living someone else's life.”": "«وقتك محدود، فلا تُهدره في عيش حياة شخص آخر.»", "Tao Te Ching": "داو دي جينغ", "Nelson Mandela": "نيلسون مانديلا", "“Whoever takes a path in search of knowledge, Allah will make easy for him a path to Paradise.”": "«من سلك طريقًا يلتمس فيه علمًا، سهّل الله له به طريقًا إلى الجنة.»", "Speech, 2003": "خطاب، 2003", "Sun Tzu": "صن تزو", "Stanford commencement, 2005": "كلمة التخرج في ستانفورد، 2005", "“The strong person is not the one who overpowers others, but the one who controls himself when angry.”": "«ليس الشديدُ بالصُّرَعة، إنما الشديد الذي يملك نفسه عند الغضب.»", "Security expert": "خبير أمن المعلومات", "“Security is a process, not a product.”": "«الأمن عملية مستمرة، لا منتج يُشترى.»", "“Imagination is more important than knowledge. Knowledge is limited, while imagination embraces the entire world.”": "«الخيال أهم من المعرفة؛ فالمعرفة محدودة، بينما يحيط الخيال بالعالم كلّه.»", "Hamza Suleiman Al-Adawi": "حمزة سليمان العدوي", "Hamza Suleiman": "حمزة سليمان", "Gaming Development": "تطوير الألعاب", "Research and Innovation": "البحث والابتكار", "Sky blue": "أزرق سماوي", "Sand": "رملي"};
+  Object.assign(AR,{
+    "I'm a Computer Engineering student building secure networks and practical products. I combine": "أنا طالب هندسة حاسوب أبني شبكات آمنة ومنتجات عملية. وأجمع بين",
+    "cybersecurity expertise with a founder's focus on impact.": "خبرة في الأمن السيبراني وعقلية رائد الأعمال التي تركز على الأثر.",
+    "Engineering with curiosity. Security with purpose.": "هندسة بدافع الفضول. وأمنٌ له غاية.",
+    "I'm Hamza, a Computer Engineering student focused on cybersecurity, with hands-on experience in network security, full-stack development, and entrepreneurship.": "أنا حمزة، طالب في هندسة الحاسوب أركز على الأمن السيبراني، ولديّ خبرة عملية في أمن الشبكات والتطوير المتكامل للويب وريادة الأعمال.",
+    ", a gamified learning platform, and I'm currently a networking intern on the Middle East College upgrade project.": "، منصة تعليمية تعتمد على أسلوب الألعاب، وأتدرّب حاليًا في مجال الشبكات ضمن مشروع ترقية شبكة كلية الشرق الأوسط.",
+    "I enjoy working with people through public speaking, mentoring, and technical writing. Outside work, I enjoy running, chess, and football.": "أستمتع بالعمل مع الآخرين من خلال التحدث أمام الجمهور والإرشاد والكتابة التقنية. وخارج العمل، أمارس الجري والشطرنج وكرة القدم.",
+    "Supporting the Middle East College network upgrade and working on campus infrastructure.": "أساهم في ترقية شبكة كلية الشرق الأوسط والعمل على بنيتها التحتية داخل الحرم الجامعي.",
+    "Founded Sahro, a gamified learning platform used by 30+ students. I secured formal incubation with Middle East College and Riyada Oman, and lead a six-person team using an intranet I built.": "أسّست سحرو، منصة تعليمية تعتمد على أسلوب الألعاب يستخدمها أكثر من 30 طالبًا. وحصلت على احتضان رسمي من كلية الشرق الأوسط وريادة عُمان، وأقود فريقًا من ستة أشخاص عبر شبكة داخلية طوّرتها.",
+    "Completed intensive full-stack training in C#, HTML, CSS, and JavaScript. Led the final project team, coordinating tasks and delivering on time.": "أكملت تدريبًا مكثفًا في التطوير المتكامل باستخدام C# وHTML وCSS وJavaScript. وقدت فريق المشروع الختامي، فنسّقت المهام وضمنت التسليم في الموعد.",
+    "Handled Active Directory tasks, monitored network and database systems, and supported the help desk. Presented on games and AI in learning at the annual IT Day.": "تولّيت مهام Active Directory، وراقبت أنظمة الشبكات وقواعد البيانات، وقدّمت دعمًا لمكتب المساعدة. كما قدّمت عرضًا عن الألعاب والذكاء الاصطناعي في التعلّم خلال يوم تقنية المعلومات السنوي.",
+    "Designed a secure enterprise network in Cisco Packet Tracer using VLANs, ACLs, and SSH. Added attack simulations, video tutorials, and an interactive cybersecurity dashboard.": "صمّمت شبكة مؤسسية آمنة باستخدام Cisco Packet Tracer وVLANs وACLs وSSH. وأضفت محاكاة للهجمات وفيديوهات تعليمية ولوحة تفاعلية للأمن السيبراني.",
+    "Built a C#/.NET flight booking and management system with role-based access and a REST API. Owned the front end and led the final presentation.": "طوّرت نظامًا لحجز الرحلات وإدارتها باستخدام C#/.NET وواجهة REST API، مع صلاحيات بحسب الدور. وتولّيت الواجهة الأمامية وقدت العرض الختامي.",
+    "A gamified learning platform that helps people understand difficult concepts. Used by 30+ students so far.": "منصة تعليمية تعتمد على أسلوب الألعاب تساعد على فهم المفاهيم الصعبة، وقد استخدمها أكثر من 30 طالبًا حتى الآن.",
+    "Words I live by": "مبادئ أسترشد بها",
+    "Contact": "تواصل معي",
+    "Networking Intern": "متدرّب في الشبكات",
+    "Full-Stack Developer Intern": "متدرّب في تطوير الويب المتكامل",
+    "Sales & Technical Support Trainee": "متدرّب في المبيعات والدعم الفني",
+    "President": "رئيس الفرع",
+    "ISACA Student Chapter, Middle East College": "الفرع الطلابي لـISACA في كلية الشرق الأوسط",
+    "Things I've built, from secure networks to full-stack apps.": "نماذج من أعمالي، من الشبكات الآمنة إلى تطبيقات الويب المتكاملة.",
+    "View on GitHub": "عرض المشروع على GitHub",
+    "Team lead": "قائد الفريق",
+    "Live demo": "جرّب التطبيق",
+    "Open tool": "استخدم الأداة",
+    "See all repositories on GitHub": "اطّلع على جميع مستودعاتي على GitHub",
+    "Credentials & community": "الشهادات والمشاركة المجتمعية",
+    "Team structure": "تنظيم الفرق",
+    "Beyond the screen": "ما وراء الشاشة",
+    "The things that keep me balanced and make me a better teammate.": "اهتمامات تحافظ على توازني وتجعلني زميلًا أفضل.",
+    "I love playing, and it's where I learned a lot about teamwork.": "أحب لعب كرة القدم؛ فمن خلالها تعلّمت الكثير عن العمل الجماعي.",
+    "Working with people": "التعاون مع الآخرين",
+    "My best work happens in a team, building and learning together.": "أنجز أفضل أعمالي ضمن فريق نبني ونتعلّم فيه معًا.",
+    "Chess trains me to stay calm and think a few moves ahead.": "يدرّبني الشطرنج على الهدوء والتفكير عدة خطوات إلى الأمام.",
+    "AI learner": "متعلّم في الذكاء الاصطناعي",
+    "I keep exploring how AI works and how to use it to build and learn better.": "أستكشف كيف يعمل الذكاء الاصطناعي وكيف أستفيد منه في التطوير والتعلّم.",
+    "Have an idea, role, or collaboration in mind? I would be glad to hear from you.": "هل لديك فكرة أو فرصة أو تعاون ترغب في مناقشته؟ يسعدني التواصل معك.",
+    "“The impediment to action advances action. What stands in the way becomes the way.”": "«ما يعيق العمل يدفعه إلى الأمام؛ وما يقف في الطريق يصبح هو الطريق.»",
+    "“Know the enemy and know yourself, and in a hundred battles you will never be in peril.”": "«اعرف عدوّك واعرف نفسك، فلن تكون في خطر ولو خضت مئة معركة.»"
+  });
+  var PH={"Your name": "اسمك", "How can we work together?": "كيف يمكننا العمل معًا؟", "Tell me a little about your idea...": "أخبرني قليلًا عن فكرتك..."};
+  var orig=new Map(), T0=document.title, btn=document.getElementById('lang');
+  function each(fn){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),n;
+    while(n=w.nextNode()){ var p=n.parentNode; if(p.nodeName==='SCRIPT'||p.id==='lang') continue; fn(n); }
+  }
+  function apply(toAr){
+    each(function(n){
+      if(toAr){
+        var k=n.nodeValue.replace(/\s+/g,' ').trim();
+        if(AR[k]!==undefined){
+          if(!orig.has(n)) orig.set(n,n.nodeValue);
+          var m=n.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/);
+          n.nodeValue=m[1]+AR[k]+m[2];
+        }
+      } else if(orig.has(n)){ n.nodeValue=orig.get(n); }
+    });
+    document.querySelectorAll('input,textarea').forEach(function(el){
+      var p=el.getAttribute('placeholder'); if(!p) return;
+      if(toAr){ if(PH[p]){ el.setAttribute('data-en',p); el.setAttribute('placeholder',PH[p]); } }
+      else if(el.getAttribute('data-en')){ el.setAttribute('placeholder',el.getAttribute('data-en')); el.removeAttribute('data-en'); }
+    });
+    document.documentElement.lang=toAr?'ar':'en';
+    document.documentElement.dir=toAr?'rtl':'ltr';
+    document.title=toAr?(AR[T0]||T0):T0;
+    btn.textContent=toAr?'EN':'ع';
+    btn.setAttribute('aria-label',toAr?'Switch to English':'التبديل إلى العربية');
+    try{ localStorage.setItem('lang',toAr?'ar':'en'); }catch(e){}
+  }
+  var isAr=false;
+  btn.addEventListener('click',function(){ isAr=!isAr; apply(isAr); });
+  var burger=document.getElementById('burger'), nav=document.getElementById('mainnav');
+  if(burger&&nav){
+    burger.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){ nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); });
+    });
+    document.addEventListener('click',function(e){
+      if(!nav.contains(e.target)&&!burger.contains(e.target)) { nav.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
+    });
+  }
+  try{ if(localStorage.getItem('lang')==='ar'){ isAr=true; apply(true); } }catch(e){}
+})();
+
+// Quote carousel: each quote stays long enough to read (minimum 13 s, about 0.6 s per word). Hover or focus pauses it.
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.q')), dots=[].slice.call(document.querySelectorAll('.qdots button'));
+  var box=document.querySelector('.quotes'), cur=0, timer=null, paused=false;
+  function ms(i){
+    var words=slides[i].querySelector('blockquote').textContent.trim().split(/\s+/).length;
+    return Math.max(13000, words*600);
+  }
+  function show(i){
+    cur=(i+slides.length)%slides.length;
+    slides.forEach(function(s,k){ s.classList.toggle('on',k===cur); s.setAttribute('aria-hidden',k===cur?'false':'true'); });
+    dots.forEach(function(d,k){ if(k===cur) d.setAttribute('aria-current','true'); else d.removeAttribute('aria-current'); });
+    schedule();
+  }
+  function schedule(){
+    clearTimeout(timer);
+    if(paused) return;
+    timer=setTimeout(function(){ show(cur+1); }, ms(cur));
+  }
+  dots.forEach(function(d,k){ d.addEventListener('click',function(){ show(k); }); });
+  box.addEventListener('mouseenter',function(){ paused=true; clearTimeout(timer); });
+  box.addEventListener('mouseleave',function(){ paused=false; schedule(); });
+  box.addEventListener('focusin',function(){ paused=true; clearTimeout(timer); });
+  box.addEventListener('focusout',function(){ paused=false; schedule(); });
+  schedule();
+})();
+</script>
+</body>
+</html>
